@@ -3,15 +3,15 @@
 These are the assignments I did for Stanford's iOS 2013 Winter Course. 
 
 ##Asgn00
-*Add different deck of cards so each flip of card shows a different one
-*PlayingCardDeck, Deck, Card, 
+* Add different deck of cards so each flip of card shows a different one
+* PlayingCardDeck, Deck, Card, 
 
 
 ##Asgn01
-*TBA
+* TBA
 
 ##Asgn02
-*TBA
+* TBA
 
 ##Asgn03
-*TBA
+* TBA
