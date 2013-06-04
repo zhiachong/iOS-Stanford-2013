@@ -11,6 +11,24 @@
 @implementation PlayingCard
 @synthesize suit = _suit;
 
+-(int)match:(NSArray *)cards
+{
+    int score = 0;
+    if ([cards count] == 1)
+    {
+        //use lastObject because it will send nil if array is empty
+        PlayingCard *card = [cards lastObject]; //cards objectAtIndex also work
+        if ([card.suit isEqualToString:self.suit])
+        {
+            score = 1;
+        } else if (card.rank == self.rank)
+        {
+            score = 4;
+        }
+    }
+    return score;
+}
+
 +(NSArray *)validSuits
 {
     return @[@"♥", @"♠", @"♣", @"♦"];
