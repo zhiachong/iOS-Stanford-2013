@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D9340B86175D17CC000ED475 /* pokercard.png in Resources */ = {isa = PBXBuildFile; fileRef = D9340B85175D17CC000ED475 /* pokercard.png */; };
+		D9340B88175DC379000ED475 /* orangeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D9340B87175DC378000ED475 /* orangeButton.png */; };
+		D9340B8A175DC3A7000ED475 /* orangeButtonHighlight.png in Resources */ = {isa = PBXBuildFile; fileRef = D9340B89175DC3A7000ED475 /* orangeButtonHighlight.png */; };
 		D9812E551757D86F00A06A94 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9812E541757D86F00A06A94 /* UIKit.framework */; };
 		D9812E571757D86F00A06A94 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9812E561757D86F00A06A94 /* Foundation.framework */; };
 		D9812E591757D86F00A06A94 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9812E581757D86F00A06A94 /* CoreGraphics.framework */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		D9340B85175D17CC000ED475 /* pokercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pokercard.png; sourceTree = "<group>"; };
+		D9340B87175DC378000ED475 /* orangeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeButton.png; sourceTree = "<group>"; };
+		D9340B89175DC3A7000ED475 /* orangeButtonHighlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeButtonHighlight.png; sourceTree = "<group>"; };
 		D9812E511757D86F00A06A94 /* Matchismo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Matchismo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9812E541757D86F00A06A94 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D9812E561757D86F00A06A94 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -74,6 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				D9340B85175D17CC000ED475 /* pokercard.png */,
+				D9340B87175DC378000ED475 /* orangeButton.png */,
+				D9340B89175DC3A7000ED475 /* orangeButtonHighlight.png */,
 				D9812E661757D86F00A06A94 /* Default.png */,
 				D9812E681757D86F00A06A94 /* Default@2x.png */,
 				D9812E6A1757D86F00A06A94 /* Default-568h@2x.png */,
@@ -209,6 +215,8 @@
 				D9812E6B1757D86F00A06A94 /* Default-568h@2x.png in Resources */,
 				D9812E6E1757D86F00A06A94 /* MainStoryboard.storyboard in Resources */,
 				D9340B86175D17CC000ED475 /* pokercard.png in Resources */,
+				D9340B88175DC379000ED475 /* orangeButton.png in Resources */,
+				D9340B8A175DC3A7000ED475 /* orangeButtonHighlight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,11 +8,18 @@
 
 #import "CardMatchingGame.h"
 @interface CardMatchingGame()
+@property(strong, nonatomic)NSString* results;
 @property(readwrite, nonatomic)int score; //for readability, add readwrite because its public is readonly
 @property(strong, nonatomic)NSMutableArray *cards; //of Card
 @end
 
 @implementation CardMatchingGame
+
+-(NSString *)results
+{
+    if (!_results) _results = [[NSString alloc]init];
+    return _results;
+}
 
 -(NSMutableArray *)cards
 {
@@ -61,17 +68,26 @@
                         card.unplayable = YES;
                         otherCard.unplayable = YES;
                         self.score += matchScore * MATCH_BONUS;
+                        self.results = [NSString stringWithFormat:@"Matched %@ and %@  for %d points!", card.contents, otherCard.contents, matchScore * MATCH_BONUS];
                     } else {
                         otherCard.faceUp = NO;
+                        self.results = [NSString stringWithFormat:@"%@ and %@ don't match! %d point penalty!", card.contents, otherCard.contents, MISMATCH_PENALTY];
                         self.score -= MISMATCH_PENALTY;
                     }
                     break;
+                } else {
+                    self.results = [NSString stringWithFormat:@"Flipped up %@", card.contents];
                 }
             }
             self.score -= FLIP_COST;
         }
         card.faceUp = !card.isFaceUp;
     }
+}
+
+-(NSString*)flipCardResults
+{
+    return self.results;
 }
 
 -(Card *)cardAtIndex:(NSUInteger)index

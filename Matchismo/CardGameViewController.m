@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (nonatomic) int flipCount;
+@property (weak, nonatomic) IBOutlet UILabel *flippedResults;
+
 //@property (strong, nonatomic) Deck *deckOfCards; //instead of PlayingCardDeck because Deck is more generic
 @property(strong, nonatomic) CardMatchingGame *game;
 @end
@@ -66,8 +68,14 @@
         [cardButton setImage:transparentImage forState:UIControlStateSelected];
 
         [cardButton setImage:transparentImage forState:UIControlStateSelected|UIControlStateDisabled];
-        
     }
+}
+
+- (IBAction)dealCards {
+    self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
+    self.flipCount = 0;
+    self.flippedResults.text = [NSString stringWithFormat:@"Flipped Results"];
+    [self updateUI];
 }
 
 -(void)setFlipCount:(int)flipCount
@@ -80,6 +88,8 @@
 {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
+    self.flippedResults.text = [self.game flipCardResults];
+    
     [self updateUI];
 }
 

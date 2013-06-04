@@ -20,6 +20,8 @@
 
 -(Card *)cardAtIndex:(NSUInteger)index;
 
+-(NSString*)flipCardResults;
+
 //readonly means only a getter, no setters
 @property (readonly, nonatomic)int score;
 
