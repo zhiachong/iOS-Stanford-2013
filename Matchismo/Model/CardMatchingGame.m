@@ -63,6 +63,8 @@
             {
                 if (otherCard.isFaceUp && !otherCard.isUnplayable){
                     int matchScore = [card match:@[otherCard]];
+                    NSLog(@"match score: %d", matchScore);
+                    
                     if (matchScore)
                     {
                         card.unplayable = YES;
