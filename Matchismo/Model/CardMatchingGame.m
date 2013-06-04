@@ -87,7 +87,7 @@
 
 -(NSString*)flipCardResults
 {
-    return self.results;
+    return ([self.results  isEqualToString:@""]) ? @"Flipped Results":self.results;
 }
 
 -(Card *)cardAtIndex:(NSUInteger)index

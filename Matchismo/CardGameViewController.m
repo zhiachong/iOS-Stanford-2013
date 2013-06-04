@@ -68,13 +68,14 @@
         [cardButton setImage:transparentImage forState:UIControlStateSelected];
 
         [cardButton setImage:transparentImage forState:UIControlStateSelected|UIControlStateDisabled];
+        
+        self.flippedResults.text = [self.game flipCardResults];
     }
 }
 
 - (IBAction)dealCards {
     self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
     self.flipCount = 0;
-    self.flippedResults.text = [NSString stringWithFormat:@"Flipped Results"];
     [self updateUI];
 }
 
@@ -88,7 +89,6 @@
 {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
-    self.flippedResults.text = [self.game flipCardResults];
     
     [self updateUI];
 }
