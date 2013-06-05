@@ -13,7 +13,6 @@
 
 -(int)match:(NSArray *)cards
 {
-    NSLog(@"In Playing Card");
     int score = 0; 
     if ([cards count] == 1) //EASY FOR MATCHING 1 card
     {

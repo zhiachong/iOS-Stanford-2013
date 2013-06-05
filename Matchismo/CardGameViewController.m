@@ -16,6 +16,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (nonatomic) int flipCount;
 @property (weak, nonatomic) IBOutlet UILabel *flippedResults;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
 
 //@property (strong, nonatomic) Deck *deckOfCards; //instead of PlayingCardDeck because Deck is more generic
 @property(strong, nonatomic) CardMatchingGame *game;
@@ -23,6 +24,18 @@
 
 
 @implementation CardGameViewController
+
+- (IBAction)changeMode:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0)
+    {
+        NSLog(@"2-Card selected");
+        
+    }
+    else if (sender.selectedSegmentIndex == 1)
+    {
+        NSLog(@"3-Card selected");
+    }
+}
 
 -(CardMatchingGame *)game
 {
@@ -47,7 +60,7 @@
 
 //makes UI look like the model
 -(void)updateUI
-{
+{    
     for (UIButton *cardButton in self.cardButtons)
     {
         Card *card = [self.game cardAtIndex:
@@ -76,6 +89,7 @@
 - (IBAction)dealCards {
     self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
     self.flipCount = 0;
+    self.segmentControl.enabled = YES;
     [self updateUI];
 }
 
@@ -89,7 +103,7 @@
 {
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     self.flipCount++;
-    
+    self.segmentControl.enabled = NO;
     [self updateUI];
 }
 
