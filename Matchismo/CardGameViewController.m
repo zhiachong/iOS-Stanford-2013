@@ -113,7 +113,7 @@ typedef enum {one, two, three} GAMEMODE;
     else if (self.gameControl == two)
         [self.game twoCardFlipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     else if (self.gameControl == three)
-        NSLog(@"three");
+        [self.game threeCardFlipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     
     self.flipCount++;
     self.segmentControl.enabled = NO;

@@ -140,7 +140,56 @@
 
 -(void)threeCardFlipCardAtIndex:(NSUInteger)index
 {
+    Card *card = [self cardAtIndex:index];
+    Card *secondCard = nil;
+    Card *thirdCard = nil;
+    Card *fourthCard = nil;
     
+    if (card && !card.isUnplayable)
+    {
+        if (!card.isFaceUp) {
+            for (Card *otherCard in self.cards)
+            {
+                if (otherCard.isFaceUp && !otherCard.isUnplayable){
+                    if (!secondCard)
+                        secondCard = otherCard;
+                    else if (!thirdCard)
+                        thirdCard = otherCard;
+                    else if (!fourthCard)
+                        fourthCard = otherCard;
+                    
+                    if (secondCard && thirdCard && fourthCard)
+                    {
+                        int matchScore = [card match:@[secondCard, thirdCard, fourthCard]];
+                        NSLog(@"match score: %d", matchScore);
+                        
+                        if (matchScore)
+                        {
+                            card.unplayable = YES;
+                            secondCard.unplayable = YES;
+                            thirdCard.unplayable = YES;
+                            fourthCard.unplayable = YES;
+                            
+                            self.score += matchScore * MATCH_BONUS;
+                            self.results = [NSString stringWithFormat:@"Matched %@, %@, %@ and %@ for %d points!", card.contents, secondCard.contents, thirdCard.contents, fourthCard.contents, matchScore * MATCH_BONUS];
+                        } else {
+                            secondCard.faceUp = NO;
+                            thirdCard.faceUp = NO;
+                            fourthCard.faceUp = NO;
+                            
+                            self.results = [NSString stringWithFormat:@"%@, %@, %@ and %@ don't match! %d point penalty!", card.contents, secondCard.contents, thirdCard.contents, fourthCard.contents, MISMATCH_PENALTY];
+                            self.score -= MISMATCH_PENALTY;
+                        }
+                        
+                        self.score -= FLIP_COST;
+                    }
+                }
+            }
+            if (!secondCard || !thirdCard || !fourthCard)
+                self.results = [NSString stringWithFormat:@"Flipped up %@", card.contents];
+        }
+        card.faceUp = !card.isFaceUp;
+    }
 }
 
 -(NSString*)flipCardResults
