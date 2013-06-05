@@ -17,6 +17,10 @@
 
 -(void)flipCardAtIndex:(NSUInteger)index;
 
+-(void)twoCardFlipCardAtIndex:(NSUInteger)index;
+
+-(void)threeCardFlipCardAtIndex:(NSUInteger)index;
+
 -(Card *)cardAtIndex:(NSUInteger)index;
 
 -(NSString*)flipCardResults;

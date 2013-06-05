@@ -10,6 +10,8 @@
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
 
+typedef enum {one, two, three} GAMEMODE;
+
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *score;
@@ -17,7 +19,7 @@
 @property (nonatomic) int flipCount;
 @property (weak, nonatomic) IBOutlet UILabel *flippedResults;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
-
+@property(nonatomic)GAMEMODE gameControl;
 //@property (strong, nonatomic) Deck *deckOfCards; //instead of PlayingCardDeck because Deck is more generic
 @property(strong, nonatomic) CardMatchingGame *game;
 @end
@@ -28,12 +30,17 @@
 - (IBAction)changeMode:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0)
     {
-        NSLog(@"2-Card selected");
-        
+        NSLog(@"1-Card selected");
+        self.gameControl = one;
     }
     else if (sender.selectedSegmentIndex == 1)
     {
-        NSLog(@"3-Card selected");
+        NSLog(@"2-Card selected");
+        self.gameControl = two;
+    } else if (sender.selectedSegmentIndex == 2)
+    {
+        NSLog(@"3-card selected");
+        self.gameControl = three;
     }
 }
 
@@ -101,7 +108,13 @@
 
 - (IBAction)flipCard:(UIButton *)sender
 {
-    [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    if (self.gameControl == one)
+        [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    else if (self.gameControl == two)
+        [self.game twoCardFlipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    else if (self.gameControl == three)
+        NSLog(@"three");
+    
     self.flipCount++;
     self.segmentControl.enabled = NO;
     [self updateUI];

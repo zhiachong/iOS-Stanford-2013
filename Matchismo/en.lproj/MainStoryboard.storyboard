@@ -340,6 +340,7 @@
                                 <rect key="frame" x="89" y="8" width="142" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
+                                    <segment title="1-Card"/>
                                     <segment title="2-Card"/>
                                     <segment title="3-Card"/>
                                 </segments>

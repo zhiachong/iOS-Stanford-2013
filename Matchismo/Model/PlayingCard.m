@@ -46,12 +46,19 @@
         
         PlayingCard *card = [cards objectAtIndex:[cards count] - 3];
         
-        if ([card.suit isEqualToString:self.suit] && [card.suit isEqualToString:lastCard.suit] && [lastCard.suit isEqualToString:secondLastcard.suit])
+        //first two cards are the same suit
+        if ([card.suit isEqualToString:self.suit] && [card.suit isEqualToString:lastCard.suit])
         {
             score = 4;
-        } else if (card.rank == self.rank && card.rank == lastCard.rank && lastCard.rank == secondLastcard.rank)
+            //all three cards have the same suit
+            if ([lastCard.suit isEqualToString:secondLastcard.suit])
+                score += 4;
+        } else if (card.rank == self.rank && card.rank == lastCard.rank)
         {
             score = 16;
+            //all three cards have the same rank
+            if (lastCard.rank == secondLastcard.rank)
+                score += 8;
         }
     }
     return score;
