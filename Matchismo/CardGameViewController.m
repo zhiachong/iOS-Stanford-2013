@@ -30,16 +30,13 @@ typedef enum {one, two, three} GAMEMODE;
 - (IBAction)changeMode:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0)
     {
-        NSLog(@"1-Card selected");
         self.gameControl = one;
     }
     else if (sender.selectedSegmentIndex == 1)
     {
-        NSLog(@"2-Card selected");
         self.gameControl = two;
     } else if (sender.selectedSegmentIndex == 2)
     {
-        NSLog(@"3-card selected");
         self.gameControl = three;
     }
 }
@@ -55,14 +52,6 @@ typedef enum {one, two, three} GAMEMODE;
 {
     _cardButtons = cardButtons;
     [self updateUI];
-    
-    /*
-    for (UIButton *cardButton in self.cardButtons)
-    {
-        Card *card = [self.deckOfCards drawRandomCard];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-    }
-    */ //not needed anymore
 }
 
 //makes UI look like the model
