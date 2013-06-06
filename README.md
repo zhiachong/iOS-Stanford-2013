@@ -10,6 +10,7 @@ I read a little into BigNerdRanch's great introduction book to iOS programming, 
 
 ##Progress
 Day 1 - Finished Lecture 2 and 3.
+Day 2 - Finished Lecture 4. Coded the Text Attribute program according to the lecture.
 
 ##Assignments
 ###Assignment 0 - Day 1
