@@ -83,7 +83,7 @@ typedef enum {one, two, three} GAMEMODE;
 }
 
 - (IBAction)dealCards {
-    self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
+    self.game = nil;
     self.flipCount = 0;
     self.segmentControl.enabled = YES;
     [self updateUI];
