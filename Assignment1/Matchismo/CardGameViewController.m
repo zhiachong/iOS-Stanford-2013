@@ -9,10 +9,13 @@
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
 #import "CardMatchingGame.h"
+#import "GameResult.h"
 
 typedef enum {one, two, three} GAMEMODE;
 
 @interface CardGameViewController ()
+@property (strong,nonatomic)GameResult *gameResult;
+
 @property (weak, nonatomic) IBOutlet UILabel *flipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *score;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
@@ -26,6 +29,13 @@ typedef enum {one, two, three} GAMEMODE;
 
 
 @implementation CardGameViewController
+
+-(GameResult *)gameResult
+{
+    if (!_gameResult) _gameResult = [[GameResult alloc]init];
+
+    return _gameResult;
+}
 
 - (IBAction)changeMode:(UISegmentedControl *)sender {
     if (sender.selectedSegmentIndex == 0)
@@ -83,8 +93,9 @@ typedef enum {one, two, three} GAMEMODE;
 }
 
 - (IBAction)dealCards {
-    self.game = [[CardMatchingGame alloc]initWithCardCount:self.cardButtons.count usingDeck:[[PlayingCardDeck alloc]init]];
+    self.game = nil;
     self.flipCount = 0;
+    self.gameResult = nil;
     self.segmentControl.enabled = YES;
     [self updateUI];
 }
@@ -105,6 +116,7 @@ typedef enum {one, two, three} GAMEMODE;
         [self.game threeCardFlipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     
     self.flipCount++;
+    self.gameResult.score = self.game.score;
     self.segmentControl.enabled = NO;
     [self updateUI];
 }

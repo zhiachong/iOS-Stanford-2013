@@ -55,8 +55,9 @@
 
 //TODO
 //implement 2 card and 3 card checking
+//CAN BE GREATLY SIMPLIFIED into one method by taking in an NSUInteger for how many cards to check
 
--(void)flipCardAtIndex:(NSUInteger)index
+-(void)flipCardAtIndex:(NSUInteger)index 
 {
     Card *card = [self cardAtIndex:index];
     if (card && !card.isUnplayable)

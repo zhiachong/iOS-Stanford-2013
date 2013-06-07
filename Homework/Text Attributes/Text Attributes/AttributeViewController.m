@@ -12,24 +12,44 @@
 @property (weak, nonatomic) IBOutlet UILabel *selectedWordLabel;
 @property (weak, nonatomic) IBOutlet UILabel *wordLabel;
 @property (weak, nonatomic) IBOutlet UIStepper *selectedWordStepper;
-
 @end
 
 @implementation AttributeViewController
 
--(void)addAttributes:(NSDictionary *)attributes range:(NSRange)range
+//find the range to apply
+//then apply the attribute to the range
+-(void)addAttributes:(NSDictionary *)dictionary range:(NSRange)range
 {
-    if (range.location != NSNotFound){
-        NSMutableAttributedString *mutableAttributedString = [self.wordLabel.attributedText mutableCopy];
-        [mutableAttributedString addAttributes:attributes range:range];
-        self.wordLabel.attributedText = mutableAttributedString;
+    if (range.location != NSNotFound)
+    {
+        NSMutableAttributedString *mutableCopyOfDisplayText = [self.wordLabel.attributedText mutableCopy];
+        [mutableCopyOfDisplayText addAttributes:dictionary range:range];
+        self.wordLabel.attributedText = mutableCopyOfDisplayText;
     }
 }
 
--(void)addSelectedWordAttributes:(NSDictionary *)attributes
+-(void)addSelectedWordAttributes:(NSDictionary*)dictionary
 {
-    NSRange range = [[self.wordLabel.attributedText string] rangeOfString:self.selectedWordLabel.text];
-    [self addAttributes:attributes range:range];
+    //find the range to apply
+    NSRange range = NSMakeRange(0, self.wordLabel.text.length);
+    
+    NSMutableAttributedString *mutableAttributedString = [self.wordLabel.attributedText mutableCopy];
+    
+    //finds all the words to highlight in the text
+    while(range.location != NSNotFound)
+    {
+        range = [[mutableAttributedString string] rangeOfString:self.selectedWordLabel.text options:0 range:range];
+        if(range.location != NSNotFound) {
+            [self addAttributes:dictionary range:range];
+            range = NSMakeRange(range.location + range.length, mutableAttributedString.length - (range.location + range.length));
+        }
+    }
+    
+    //for just a single occurrence
+    /*
+     NSRange range = [[self.wordLabel.attributedText string] rangeOfString:self.selectedWordLabel.text];
+     [self addAttributes:dictionary range:range];
+     */
 }
 
 
@@ -45,11 +65,17 @@
     [self addSelectedWordAttributes:@{NSForegroundColorAttributeName: (sender.backgroundColor)}];
 }
 
+//font consists of font and font size (2 attributes to configure)
+
+//pick the attribute of the existing font
+//find the font of the existing font from attribute
+//replace font with the font of your choice and size
 - (IBAction)changeFont:(UIButton *)sender {
     CGFloat fontSize = [UIFont systemFontSize];
     
     NSDictionary *attributes = [self.wordLabel.attributedText attributesAtIndex:0 effectiveRange:NULL];
-    UIFont *existingFont = attributes[NSFontAttributeName]; //finds the font of the existing thing
+    
+    UIFont *existingFont = attributes[NSFontAttributeName]; //finds the font of the existing label
     
     if (existingFont) fontSize = existingFont.pointSize;
     
@@ -57,11 +83,10 @@
     [self addSelectedWordAttributes:@{ NSFontAttributeName: font}];
 }
 
-
-
 -(NSArray*)wordList
 {
-    NSArray *wordList = [[self.wordLabel.attributedText string] componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    //in the lecture, Paul used [self.wordLabel.attributedText string]
+    NSArray *wordList = [self.wordLabel.text componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if ([wordList count])
         return wordList;
     else
@@ -76,7 +101,6 @@
 -(NSString *)selectedWord
 {
     return [self wordList][(int)self.selectedWordStepper.value];
-    self.selectedWordLabel.text = [self selectedWord];
 }
 
 - (void)viewDidLoad
